@@ -1,8 +1,6 @@
 <template>
   <div class="hello">
     <Form v-on:submit-item="submit" />
-      <p>Original message: "{{ name }}"</p>
-      <p>Computed reversed message: "{{ reversedMessage }}"</p>
       <ul>
         <li v-for="(item,index) in data" v-bind::key="index">
           <span>{{item}}</span> 
@@ -13,42 +11,31 @@
 </template>
 
 <script>
+import Form from "./Form";
+
 export default {
-  name: 'Test',
+  name: "List",
+  components:{
+    Form
+  },
   data : function() {
     return{
-      name:"",
-      data:[],
-      editIndex:false
+      data:[]
     };
   },
   methods:{
-    submit:function(e){
-      if(e.keyCode === 13){
-        if(this.editIndex){
-          Vue.set(this.data,this.editIndex,this.name);
-          this.name="";
-          this.editIndex= -1;
-        }
-        else{
-          this.data.push(this.name);
-          this.name = "";
-        }
-      }
+    submit:function(name){
+      this.data.push(name);
     },
     clear: function(index){
      this.data.splice(index,1);
     },
-    edit:function(index){
-      this.editIndex=index;
-      this.name=this.data[index];
-    }
+    edit:function(){
+      Vue.set(this.data,this.editIndex,this.name);
+      this.name = "";
+      this.editIndex = -1;
+    },
 
-  },
-  computed: {
-    reversedMessage: function(){
-      return this.name.split('').reverse().join('');
-    }
   }
 }
 </script>
