@@ -2,24 +2,20 @@
   <div class="hello">
     <p> Type something...</p>
     <i>Press Enter</i>
-    
     <br/>
     <form v-on:submit.prevent >
       <input v-on:keypress="submit" type="text" v-model="name" />
     </form>
-    
     <p>Original message: "{{ name }}"</p>
-  <p>Computed reversed message: "{{ reversedMessage }}"</p>
-
-  <ul>
-    <li v-for="(item,index) in data" v-bind::key="index">
-      <span>{{item}}</span> 
-    <button v-on:click.prevent ="clear(index)"> Clear </button>
-    <button v-on:click.prevent="edit(index)">Edit</button>
-    </li> 
-  </ul>
+    <p>Computed reversed message: "{{ reversedMessage }}"</p>
+    <ul>
+      <li v-for="(item,index) in data" v-bind::key="index">
+        <span>{{item}}</span> 
+        <button v-on:click.prevent ="clear(index)"> Clear </button>
+        <button v-on:click.prevent="edit(index)">Edit</button>
+      </li> 
+    </ul>
   </div>
-
 </template>
 
 <script>
@@ -30,9 +26,8 @@ export default {
       name:"",
       data:[],
       editIndex:false
-      };
-    },
-
+    };
+  },
   methods:{
     submit:function(e){
       if(e.keyCode === 13){
@@ -74,7 +69,6 @@ ul {
   padding: 0;
 }
 li {
-  /* display: inline-block; */
   margin: 0 10px;
 }
 a {
