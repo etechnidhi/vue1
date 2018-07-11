@@ -29,12 +29,7 @@
 
 
 <select v-model="color_value">
-  <option v-bind:value="{color: 'red'}">Red</option>
-  <option v-bind:value="{color: 'green'}">Green</option>
-  <option v-bind:value="{color: 'yellow'}">Yellow</option>
-  <option v-bind:value="{color: 'orange'}">orange</option>
-  <option v-bind:value="{color: 'grey'}">Grey</option>
-  <option v-bind:value="{color: 'pink'}">Pink</option>
+ <option v-for="(col,index) in colors" v-bind:key="index" v-bind:value="{color:col}">{{col}} </option>
 </select>
   </div>
 
@@ -47,7 +42,7 @@ export default {
     return{
       name:"Nidhi",
       date: false,
-      // isRed : false
+      colors:["red","yellow","green","orange","pink","grey"],
       color_value:{
         color: "red"
       },
