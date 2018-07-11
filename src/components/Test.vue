@@ -12,7 +12,11 @@
   <p>Computed reversed message: "{{ reversedMessage }}"</p>
 
   <ul>
-    <li v-for="(item,index) in data" v-bind::key="index">{{item}} </li> 
+    <li v-for="(item,index) in data" v-bind::key="index">
+      <span>{{item}}</span> 
+    <button v-on:click.prevent ="clear(index)"> Clear </button>
+    <button v-on:click.prevent="edit(index)">Edit</button>
+    </li> 
   </ul>
   </div>
 
@@ -24,17 +28,33 @@ export default {
   data : function() {
     return{
       name:"",
-      data:[]
-      }
+      data:[],
+      editIndex:false
+      };
     },
 
   methods:{
     submit:function(e){
       if(e.keyCode === 13){
-        this.data.push(this.name);
-        this.name = "";
+        if(this.editIndex){
+          Vue.set(this.data,this.editIndex,this.name);
+          this.name="";
+          this.editIndex= -1;
+        }
+        else{
+          this.data.push(this.name);
+          this.name = "";
+        }
       }
+    },
+    clear: function(index){
+     this.data.splice(index,1);
+    },
+    edit:function(index){
+      this.editIndex=index;
+      this.name=this.data[index];
     }
+
   },
   computed: {
     reversedMessage: function(){
