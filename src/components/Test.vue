@@ -3,7 +3,7 @@
   <div class="hello">
     <!-- {{ name }} Testing -->
 
-    <div :class="{red: isRed}">
+    <div v-bind:style="{color: color_value.color}">
       {{ name }} welcome to VueJs
     </div>
 
@@ -30,9 +30,11 @@
 
 <select v-model="color_value">
   <option v-bind:value="{color: 'red'}">Red</option>
-  <option v-bind:value="{color: 'blue'}">Green</option>
+  <option v-bind:value="{color: 'green'}">Green</option>
   <option v-bind:value="{color: 'yellow'}">Yellow</option>
   <option v-bind:value="{color: 'orange'}">orange</option>
+  <option v-bind:value="{color: 'grey'}">Grey</option>
+  <option v-bind:value="{color: 'pink'}">Pink</option>
 </select>
   </div>
 
@@ -47,7 +49,7 @@ export default {
       date: false,
       // isRed : false
       color_value:{
-        color: "black"
+        color: "red"
       },
     };
   },
@@ -89,9 +91,6 @@ export default {
     },
     makeSmall: function(){
       this.name = this.name.toLowerCase();
-    },
-    red: function(){
-      console.log(this.isRed)
     }
   },
   computed: {
