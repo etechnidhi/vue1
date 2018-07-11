@@ -1,36 +1,19 @@
 <template>
-<!-- import func from './vue-temp/vue-editor-bridge'; -->
   <div class="hello">
-    <!-- {{ name }} Testing -->
-
-    <div v-bind:style="{color: color_value.color}">
-      {{ name }} welcome to VueJs
-    </div>
-
-    <br/>
-    <br/>
-
-      {{date}} 
+    <p> Type something...</p>
+    <i>Press Enter</i>
     
     <br/>
-    <br/>
-
-    <input type="text" v-model="name"/>
-    <button v-on:click = "clear">Clear </button>
-    <button @click="makeCapital">Caps </button>
-    <br/><br/>
-    <button @click="makeSmall">Small </button>
-  
-
+    <form v-on:submit.prevent >
+      <input v-on:keypress="submit" type="text" v-model="name" />
+    </form>
+    
     <p>Original message: "{{ name }}"</p>
   <p>Computed reversed message: "{{ reversedMessage }}"</p>
 
-  <!-- <input :checked="isRed" v-model="isRed" type="checkbox" @click="red" />Red -->
-
-
-<select v-model="color_value">
- <option v-for="(col,index) in colors" v-bind:key="index" v-bind:value="{color:col}">{{col}} </option>
-</select>
+  <ul>
+    <li v-for="(item,index) in data" v-bind::key="index">{{item}} </li> 
+  </ul>
   </div>
 
 </template>
@@ -40,52 +23,17 @@ export default {
   name: 'Test',
   data : function() {
     return{
-      name:"Nidhi",
-      date: false,
-      colors:["red","yellow","green","orange","pink","grey"],
-      color_value:{
-        color: "red"
-      },
-    };
-  },
-  // created: function() {
-  //   // console.log("created");
-  //   // this.date = new Date();
-  //   this.date =
-  //   new Date().getDay()+
-  //   "-"+
-  //   new Date().getMonth()+
-  //   "-"+
-  //   new Date().getFullYear()
-  // },
-  // mounted: function() {
-  // //   console.log("mounted");
-  // //   this.date = new Date();
-  // // },
-  // // updated: function() {
-  // //   console.log("updated");
-  // // },
-  // // destroyed: function() {
-  // //   console.log("destroyed");
-  // //   this.message = new Date();
-
-  // this.date=
-  //   new Date().getDay()+
-  //   "-"+
-  //   new Date().getMonth()+
-  //   "-"+
-  //   new Date().getFullYear();
-  // },
+      name:"",
+      data:[]
+      }
+    },
 
   methods:{
-    clear: function(){
-    this.name ="";
-    },
-    makeCapital: function(){
-      this.name = this.name.toUpperCase();
-    },
-    makeSmall: function(){
-      this.name = this.name.toLowerCase();
+    submit:function(e){
+      if(e.keyCode === 13){
+        this.data.push(this.name);
+        this.name = "";
+      }
     }
   },
   computed: {
@@ -93,7 +41,7 @@ export default {
       return this.name.split('').reverse().join('');
     }
   }
-};
+}
 </script>
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
@@ -106,16 +54,14 @@ ul {
   padding: 0;
 }
 li {
-  display: inline-block;
+  /* display: inline-block; */
   margin: 0 10px;
 }
 a {
   color: #42b983;
 }
-.red{
-  color: red;
-}
-.green{
-  color: green;
+.hello li{
+  border:1px solid grey;
+  padding:6px;
 }
 </style>
