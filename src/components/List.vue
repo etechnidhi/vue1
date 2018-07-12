@@ -1,43 +1,53 @@
 <template>
-  <div class="hello">
-    <Form v-on:submit-item="submit" />
-      <ul>
-        <li v-for="(item,index) in data" v-bind::key="index">
-          <span>{{item}}</span> 
+  <div class="testing">
+    <Form v-bind:edit-index="editIndex" v-bind:name="name" v-on:edit-item="edit" v-on:submit-item="submit" />
+    <ul>
+        <li v-for="(item,index) in data" v-bind:key="index">
+          <span>{{ item }}</span> 
+
+          <a href="#" v-on:click.prevent="deleteItem(index)" >Delete</a>
+          <a href="#" v-on:click.prevent="editItem(index)" >Edit</a>
         </li> 
       </ul>
-    </form>
   </div>
 </template>
 
 <script>
+import Vue from "vue";
 import Form from "./Form";
 
 export default {
   name: "List",
-  components:{
+  components: {
     Form
   },
-  data : function() {
-    return{
-      data:[]
+  data: function() {
+    return {
+      data: [],
+      name: "",
+      editIndex: -1
     };
   },
-  methods:{
-    submit:function(name){
+  methods: {
+    submit: function(name) {
       this.data.push(name);
+      this.name = "";
     },
-    clear: function(index){
-     this.data.splice(index,1);
-    },
-    edit:function(){
-      Vue.set(this.data,this.editIndex,this.name);
+    edit: function(obj) {
+      var { name, editIndex } = obj;
+      Vue.set(this.data, editIndex, name);
       this.name = "";
       this.editIndex = -1;
     },
-
+    deleteItem: function(index) {
+      this.data.splice(index, 1);
+    },
+    editItem: function(index) {
+      this.editIndex = index;
+      this.name = this.data[index];
+    }
   }
-}
+};
 </script>
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
@@ -53,15 +63,16 @@ li {
   /* display: inline-block; */
   margin: 0 10px;
 }
-a {
+ul li a {
+  float: right;
   color: #42b983;
+  margin-right: 15px;
 }
-.hello li{
-  border:1px solid grey;
-  padding:6px;
+.hello li {
+  border: 1px solid grey;
+  padding: 6px;
 }
-button{
-  float:right;
-  margin-right:10px;
+ul li {
+  border: 1px solid grey;
 }
 </style>
