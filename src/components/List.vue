@@ -30,14 +30,11 @@ export default {
   },
   methods: {
     submit: function(name) {
-      // alert(name);
       this.data.push(name);
       this.name = "";
     },
     edit: function(obj) {
       var { name, editIndex } = obj;
-      // eslint-disable-next-line
-      console.log("actual edit", name, editIndex);
       Vue.set(this.data, editIndex, name);
       this.name = "";
       this.editIndex = -1;
@@ -46,8 +43,6 @@ export default {
       this.data.splice(index, 1);
     },
     editItem: function(index) {
-      // eslint-disable-next-line
-      console.log("edit index");
       this.editIndex = index;
       this.name = this.data[index];
     }

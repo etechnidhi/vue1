@@ -35,13 +35,8 @@ export default {
   },
   methods: {
     submit: function(e) {
-        // eslint-disable-next-line
-    //   console.log(this.editIndex);
-      // eslint-disable-next-line
-    //   console.log(this.text);
       if (e.keyCode === 13) {
         if (this.editIndex !== -1) {
-          console.log("edit item");
           this.$emit("edit-item", {
             name: this.text,
             editIndex: this.editIndex
