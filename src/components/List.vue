@@ -68,10 +68,6 @@ ul li a {
   color: #42b983;
   margin-right: 15px;
 }
-.hello li {
-  border: 1px solid grey;
-  padding: 6px;
-}
 ul li {
   border: 1px solid grey;
 }
