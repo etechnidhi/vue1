@@ -1,19 +1,22 @@
 <template>
   <div id="app">
-    <img src="./assets/logo.png">
-    <!-- <List /> -->
-    <Control />
+
+    <!-- <img src="./assets/logo.png"> -->
+    <HelloWorld />
+<!-- <HelloWorld/> -->
+    
   </div>
 </template>
 
 <script>
-// import List from './components/List.vue';
-import Control from './components/Control.vue';
+
+import HelloWorld from './components/HelloWorld.vue'
+
 export default {
   name: 'app',
   components: {
-    // List
-    Control
+    HelloWorld
+
   }
 }
 </script>
